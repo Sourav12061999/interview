@@ -21,7 +21,8 @@ function Dates({
         isDisabled && styles.gray
       } ${
         selectedDate.startDate && selectedDate.startDate >= day && styles.gray
-      }`}
+      } ${styles.date}`}
+      data-disability={isDisabled?"disabled":"enabled"}
       onClick={() => {
         if (!isDisabled) {
           if (selectedDate.startDate === null) {
@@ -32,7 +33,9 @@ function Dates({
         }
       }}
     >
+      <h3>
       {day}
+      </h3>
     </div>
   );
 }

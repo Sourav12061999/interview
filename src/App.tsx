@@ -1,11 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import DatePicker from './features/Date Range';
+import Calender from './features/Calender';
 function App() {
   return (
     <div className="App">
-      <DatePicker/>
+      <Calender/>
     </div>
   );
 }
