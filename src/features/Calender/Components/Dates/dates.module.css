@@ -1,7 +1,7 @@
-.gray {
+.disabled {
     background-color: rgb(234, 234, 234);
 }
-.blue {
+.current {
     background-color:  #B3E5FC;
 }
 
@@ -15,10 +15,9 @@
     border-radius: 3px;
     margin-bottom: 15px;
 }
-.date[data-disability="enabled"]:hover{
+.date:hover{
     cursor: pointer;
- }
-
-.date[data-disability="disabled"]:hover{
-   cursor: not-allowed;
+}
+.disabled:hover{
+    cursor: not-allowed;
 }

@@ -1,41 +1,66 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./dates.module.css";
 import { CalenderPropTypes } from "../../index.types";
+import { MonthYearSetterContext } from "../../index";
+import checkIsDisable from "../../utils/dateUI";
 interface PropTypes extends CalenderPropTypes {
   day: number;
-  isDisabled: boolean;
   isCurrentDate: boolean;
 }
 function Dates({
   day,
-  isDisabled,
   isCurrentDate,
   selectedDate,
   setSelectedDate,
 }: PropTypes) {
-  console.log(selectedDate);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const MonthYearSetter = useContext(MonthYearSetterContext);
+  const selectedMonth = MonthYearSetter?.selectedMonth;
+  const selectedYear = MonthYearSetter?.selectedYear;
+
+  useEffect(() => {
+    if (selectedMonth != undefined && selectedYear != undefined) {
+      setIsDisabled(
+        checkIsDisable(selectedMonth, selectedYear, day, selectedDate)
+      );
+    }
+  }, [selectedDate, selectedMonth, selectedYear]);
 
   return (
     <div
-      className={`${isCurrentDate && styles.blue} ${
-        isDisabled && styles.gray
-      } ${
-        selectedDate.startDate && selectedDate.startDate >= day && styles.gray
-      } ${styles.date}`}
-      data-disability={isDisabled?"disabled":"enabled"}
+      className={`${isCurrentDate && styles.current} ${styles.date} ${
+        isDisabled && styles.disabled
+      }`}
       onClick={() => {
-        if (!isDisabled) {
-          if (selectedDate.startDate === null) {
-            setSelectedDate({ ...selectedDate, startDate: day });
-          } else {
-            setSelectedDate({ ...selectedDate, endDate: day });
-          }
+        if (
+          isDisabled ||
+          selectedMonth === undefined ||
+          selectedYear === undefined
+        ){
+          return;
+        }
+        if (selectedDate.startDate === null) {
+          setSelectedDate({
+            ...selectedDate,
+            startDate: {
+              date: day,
+              month: selectedMonth,
+              year: selectedYear,
+            },
+          });
+        } else {
+          setSelectedDate({
+            ...selectedDate,
+            endDate: {
+              date: day,
+              month: selectedMonth,
+              year: selectedYear,
+            },
+          });
         }
       }}
     >
-      <h3>
-      {day}
-      </h3>
+      <h3>{day}</h3>
     </div>
   );
 }

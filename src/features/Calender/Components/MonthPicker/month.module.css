@@ -1,0 +1,23 @@
+.month{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.month>div{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.month>div:hover{
+    cursor: pointer;
+}
+
+.month>div[data-activeMonth="true"]{
+    background-color: #E53935;
+}

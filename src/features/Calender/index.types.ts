@@ -1,6 +1,11 @@
+export type DateType = {
+  date:number;
+  month:number;
+  year:number
+}
 export type DatePickerTypes = {
-  startDate: number | null;
-  endDate: number | null;
+  startDate: DateType | null;
+  endDate: DateType | null;
 };
 
 export interface MonthYearSetterType {

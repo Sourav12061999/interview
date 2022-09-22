@@ -2,6 +2,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import Dates from "../Dates";
 import { CalenderPropTypes } from "../../index.types";
 import styles from "./datePicker.module.css";
+import checkIsDisable from "../../utils/dateUI";
 
 interface PropTypes extends CalenderPropTypes {
   daysArray: Array<number>;
@@ -19,26 +20,18 @@ function Calender({
   currentDate,
   isPast,
 }: PropTypes) {
+  console.log(selectedDate);
   return (
     <div className={styles.calender}>
       {daysArray.map((date) => {
         let isCurrentDate: boolean = false;
-        let isDisabled:boolean = false;
         if (isCurrentMonth && isCurrentYear) {
           isCurrentDate = date === currentDate;
-        }
-        if(isPast){
-          isDisabled=true;
-        }else if(isCurrentMonth && isCurrentYear){
-          isDisabled = date < currentDate;
-        }else{
-          isDisabled = false;
         }
         return (
           <Fragment key={date}>
             <Dates
               isCurrentDate={isCurrentDate}
-              isDisabled={isDisabled}
               day={date}
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}

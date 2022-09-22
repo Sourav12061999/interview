@@ -1,32 +1,37 @@
-import React,{useContext} from 'react';
-import { MonthYearSetterContext } from '../..';
+import React, { useContext } from "react";
+import { MonthYearSetterContext } from "../..";
 import styles from "./Year.module.css";
-import {IoIosArrowDropleftCircle,IoIosArrowDroprightCircle} from "react-icons/io";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 function YearPicker() {
-    const  MonthYearSetter= useContext(MonthYearSetterContext);
-    const selectedYear = MonthYearSetter?.selectedYear;
-    const setSelectedYear = MonthYearSetter?.setSelectedYear;
+  const MonthYearSetter = useContext(MonthYearSetterContext);
+  const selectedYear = MonthYearSetter?.selectedYear;
+  const setSelectedYear = MonthYearSetter?.setSelectedYear;
+  const setSelectedMonth = MonthYearSetter?.setSelectedMonth;
 
-    const handleChangeYear = (task:"increment"| "decrement") =>{
-        if(setSelectedYear && selectedYear){
-            if(task==="increment"){
-                setSelectedYear(selectedYear+1);
-            }else if(task === "decrement"){
-                setSelectedYear(selectedYear-1);
-            }
-        }
+  const handleChangeYear = (task: "increment" | "decrement") => {
+    if (setSelectedYear && selectedYear && setSelectedMonth) {
+      if (task === "increment") {
+        setSelectedYear(selectedYear + 1);
+      } else if (task === "decrement") {
+        setSelectedYear(selectedYear - 1);
+      }
+      setSelectedMonth(0);
     }
+  };
   return (
     <div className={styles.yearPicker}>
-        <div onClick={() => handleChangeYear("decrement")}>
-            <IoIosArrowDropleftCircle fontSize={"2.5rem"}/>
-        </div>
-        <h1>{selectedYear}</h1>
-        <div onClick={() => handleChangeYear("increment")}>
-            <IoIosArrowDroprightCircle fontSize={"2.5rem"}/>
-        </div>
+      <div onClick={() => handleChangeYear("decrement")}>
+        <IoIosArrowDropleftCircle fontSize={"2.5rem"} />
+      </div>
+      <h1>{selectedYear}</h1>
+      <div onClick={() => handleChangeYear("increment")}>
+        <IoIosArrowDroprightCircle fontSize={"2.5rem"} />
+      </div>
     </div>
-  )
+  );
 }
 
-export default YearPicker
+export default YearPicker;

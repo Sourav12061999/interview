@@ -27,7 +27,7 @@ function Calender() {
   
   useEffect(() => {
     const days: Array<number> = [];
-    for (let i = 1; i <= MonthData[month].daysInMonth; i++) {
+    for (let i = 1; i <= MonthData[selectedMonth].daysInMonth; i++) {
       days.push(i);
     }
     setDaysArray(days);
