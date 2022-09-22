@@ -6,8 +6,9 @@ import styles from "./datePicker.module.css";
 interface PropTypes extends CalenderPropTypes {
   daysArray: Array<number>;
   currentDate: number;
-  isCurrentMonth:boolean;
-  isCurrentYear:boolean;
+  isCurrentMonth: boolean;
+  isCurrentYear: boolean;
+  isPast: boolean;
 }
 function Calender({
   setSelectedDate,
@@ -15,20 +16,29 @@ function Calender({
   daysArray,
   isCurrentMonth,
   isCurrentYear,
-  currentDate
+  currentDate,
+  isPast,
 }: PropTypes) {
   return (
     <div className={styles.calender}>
       {daysArray.map((date) => {
-        let isCurrentDate:boolean = false;
-        if(  isCurrentMonth && isCurrentYear){
+        let isCurrentDate: boolean = false;
+        let isDisabled:boolean = false;
+        if (isCurrentMonth && isCurrentYear) {
           isCurrentDate = date === currentDate;
+        }
+        if(isPast){
+          isDisabled=true;
+        }else if(isCurrentMonth && isCurrentYear){
+          isDisabled = date < currentDate;
+        }else{
+          isDisabled = false;
         }
         return (
           <Fragment key={date}>
             <Dates
               isCurrentDate={isCurrentDate}
-              isDisabled={false}
+              isDisabled={isDisabled}
               day={date}
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}

@@ -1,8 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import DatePicker from "./Components/Date Picker";
 import { DatePickerTypes } from "./index.types";
 import styles from "./styles.module.css";
-import Sidebar from "./Components/MonthPicker";
+import Sidebar from "./Components/Sidabar";
+import MonthData from "./calender.data";
+import calculateIsPast from "./utils/isPast";
+import Context from "./Components/Context";
+import { MonthYearSetterType } from "./index.types";
+
+export const MonthYearSetterContext = createContext<null | MonthYearSetterType>(
+  null
+);
 
 function Calender() {
   const [selectedDate, setSelectedDate] = useState<DatePickerTypes>({
@@ -13,33 +21,44 @@ function Calender() {
   const month = today.getMonth();
   const date = today.getDate();
   const year = today.getFullYear();
-  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const [selectedMonth, setSelectedMonth] = useState<number>(month);
   const [selectedYear, setSelectedYear] = useState<number>(year);
   const [daysArray, setDaysArray] = useState<Array<number>>([]);
+  
   useEffect(() => {
     const days: Array<number> = [];
-    for (let i = 1; i <= daysInMonth[month]; i++) {
+    for (let i = 1; i <= MonthData[month].daysInMonth; i++) {
       days.push(i);
     }
     setDaysArray(days);
-  }, []);
+  }, [selectedMonth]);
   return (
-    <div className={styles.datePicker}>
-      <div className={styles.calender}>
-        <DatePicker
-          daysArray={daysArray}
-          currentDate={date}
-          isCurrentMonth={selectedMonth === month}
-          isCurrentYear={selectedYear === year}
-          setSelectedDate={setSelectedDate}
-          selectedDate={selectedDate}
-        />
+    <Context
+      MonthYearSetter={{
+        selectedMonth,
+        setSelectedMonth,
+        setSelectedYear,
+        selectedYear,
+      }}
+      MonthYearSetterContext={MonthYearSetterContext}
+    >
+      <div className={styles.datePicker}>
+        <div className={styles.calender}>
+          <DatePicker
+            daysArray={daysArray}
+            currentDate={date}
+            isCurrentMonth={selectedMonth === month}
+            isCurrentYear={selectedYear === year}
+            setSelectedDate={setSelectedDate}
+            selectedDate={selectedDate}
+            isPast={calculateIsPast(selectedMonth, selectedYear)}
+          />
+        </div>
+        <div className={styles.monthPicker}>
+          <Sidebar />
+        </div>
       </div>
-      <div className={styles.monthPicker}>
-        <Sidebar />
-      </div>
-    </div>
+    </Context>
   );
 }
 
