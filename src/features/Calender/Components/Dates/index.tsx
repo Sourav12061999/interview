@@ -52,10 +52,25 @@ function Dates({
               year: selectedYear,
             },
           });
-        } else {
+        } else if (
+          selectedDate.startDate != null &&
+          selectedDate.endDate === null
+        ) {
           setSelectedDate({
             ...selectedDate,
             endDate: {
+              date: day,
+              month: selectedMonth,
+              year: selectedYear,
+            },
+          });
+        } else if (
+          selectedDate.startDate != null &&
+          selectedDate.endDate != null
+        ) {
+          setSelectedDate({
+            endDate: null,
+            startDate: {
               date: day,
               month: selectedMonth,
               year: selectedYear,

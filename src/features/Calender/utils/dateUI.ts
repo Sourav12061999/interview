@@ -25,7 +25,7 @@ const checkIsDisable = (
   if (curr_year === year && curr_month === month) {
     isDisabled = curr_date > date;
   }
-  if (selectedDate.startDate != null) {
+  if (selectedDate.startDate != null && selectedDate.endDate === null) {
     if (selectedDate.startDate.year > year) {
       isDisabled = true;
     } else if (selectedDate.startDate.year < year) {
@@ -74,6 +74,18 @@ const checkIsSelected = (
   ) {
     return true;
   }
+  if (selectedDate.endDate && selectedDate.startDate) {
+    var from = Date.parse(
+      `${selectedDate.startDate.month}/${selectedDate.startDate.date}/${selectedDate.startDate.year}`
+    );
+    var to = Date.parse(
+      `${selectedDate.endDate.month}/${selectedDate.endDate.date}/${selectedDate.endDate.year}`
+    );
+    var check = Date.parse(`${month}/${date}/${year}`);
+    if (check > from && check < to) {
+      return true;
+    }
+  }
   return false;
 };
-export {checkIsDisable,checkIsSelected};
+export { checkIsDisable, checkIsSelected };
