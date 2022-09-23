@@ -42,8 +42,8 @@ function Calender() {
       }}
       MonthYearSetterContext={MonthYearSetterContext}
     >
-      <div className={styles.datePicker}>
-        <div className={styles.calender}>
+      <div className={styles.calender}>
+        <div className={styles.datePicker}>
           <DatePicker
             daysArray={daysArray}
             currentDate={date}
@@ -54,7 +54,7 @@ function Calender() {
             isPast={calculateIsPast(selectedMonth, selectedYear)}
           />
         </div>
-        <div className={styles.monthPicker}>
+        <div className={styles.sidebar}>
           <Sidebar />
         </div>
       </div>

@@ -6,3 +6,7 @@
 body{
   background-color: rgb(247, 247, 247);
 }
+.App>h1{
+  font-size: 5rem;
+  text-align: center;
+}

@@ -1,4 +1,4 @@
-.datePicker{
+.calender{
     max-width: 900px;
     width: 90%;
     margin-inline: auto;
@@ -6,9 +6,22 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     margin-top: 50px;
 }
-.calender{
+.datePicker{
     width: 70%;
 }
-.monthPicker{
+.sidebar{
     width: 30%;
+}
+
+@media only screen and (max-width:965px){
+    .calender{
+        flex-direction: column-reverse;
+    }
+    .datePicker{
+        width: 100%;
+    }
+    .sidebar{
+        width: 100%;
+    }
+
 }
