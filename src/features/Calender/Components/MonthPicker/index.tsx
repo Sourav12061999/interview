@@ -8,12 +8,13 @@ function MonthPicker() {
   const setSelectedMonth = MonthYearSetter?.setSelectedMonth;
   return (
     <div className={styles.month}>
+      {/* I am maping over the month data and show them  */}
       {MonthData.map((el, index) => (
         <div
-          data-activemonth={selectedMonth === index ? "true" : "false"}
-          onClick={() =>{
-            if(!setSelectedMonth) return;
-            setSelectedMonth(index)
+          data-activemonth={selectedMonth === index ? "true" : "false"} // this data attribute is used to style the current seelcted month
+          onClick={() => {
+            if (!setSelectedMonth) return;
+            setSelectedMonth(index);
           }}
           key={el.name}
         >

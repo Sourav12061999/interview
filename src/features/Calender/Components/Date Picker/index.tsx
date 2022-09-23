@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import Dates from "../Dates";
 import { CalenderPropTypes } from "../../index.types";
 import styles from "./datePicker.module.css";
@@ -8,7 +8,6 @@ interface PropTypes extends CalenderPropTypes {
   currentDate: number;
   isCurrentMonth: boolean;
   isCurrentYear: boolean;
-  isPast: boolean;
 }
 function Calender({
   setSelectedDate,
@@ -17,7 +16,6 @@ function Calender({
   isCurrentMonth,
   isCurrentYear,
   currentDate,
-  isPast,
 }: PropTypes) {
   console.log(selectedDate);
   return (
