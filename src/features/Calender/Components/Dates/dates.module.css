@@ -1,10 +1,10 @@
-.disabled {
-    background-color: rgb(234, 234, 234);
-}
+
 .current {
     background-color:  #B3E5FC;
 }
-
+.disabled {
+    background-color: rgb(234, 234, 234);
+}
 .date {
     width: 100px;
     height: 100px;
@@ -20,4 +20,7 @@
 }
 .disabled:hover{
     cursor: not-allowed;
+}
+.selected{
+    border: 2px solid #2196F3;
 }

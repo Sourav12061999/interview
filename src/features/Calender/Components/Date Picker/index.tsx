@@ -2,7 +2,6 @@ import React, { useState, Fragment, useEffect } from "react";
 import Dates from "../Dates";
 import { CalenderPropTypes } from "../../index.types";
 import styles from "./datePicker.module.css";
-import checkIsDisable from "../../utils/dateUI";
 
 interface PropTypes extends CalenderPropTypes {
   daysArray: Array<number>;

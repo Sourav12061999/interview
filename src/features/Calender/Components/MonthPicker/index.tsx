@@ -10,7 +10,7 @@ function MonthPicker() {
     <div className={styles.month}>
       {MonthData.map((el, index) => (
         <div
-          data-activeMonth={selectedMonth === index ? "true" : "false"}
+          data-activemonth={selectedMonth === index ? "true" : "false"}
           onClick={() =>{
             if(!setSelectedMonth) return;
             setSelectedMonth(index)

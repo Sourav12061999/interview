@@ -18,6 +18,6 @@
     cursor: pointer;
 }
 
-.month>div[data-activeMonth="true"]{
+.month>div[data-activemonth="true"]{
     background-color: #E53935;
 }

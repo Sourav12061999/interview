@@ -1,4 +1,9 @@
 import { DatePickerTypes } from "../index.types";
+
+const today = new Date();
+const curr_month = today.getMonth();
+const curr_date = today.getDate();
+const curr_year = today.getFullYear();
 const checkIsDisable = (
   month: number,
   year: number,
@@ -6,10 +11,6 @@ const checkIsDisable = (
   selectedDate: DatePickerTypes
 ) => {
   let isDisabled = false;
-  const today = new Date();
-  const curr_month = today.getMonth();
-  const curr_date = today.getDate();
-  const curr_year = today.getFullYear();
   if (curr_year > year) {
     isDisabled = true;
   } else if (curr_year < year) {
@@ -51,4 +52,28 @@ const checkIsDisable = (
   }
   return isDisabled;
 };
-export default checkIsDisable;
+
+const checkIsSelected = (
+  month: number,
+  year: number,
+  date: number,
+  selectedDate: DatePickerTypes
+) => {
+  if (
+    selectedDate.startDate?.date === date &&
+    selectedDate.startDate.month === month &&
+    selectedDate.startDate.year === year
+  ) {
+    return true;
+  }
+
+  if (
+    selectedDate.endDate?.date === date &&
+    selectedDate.endDate.month === month &&
+    selectedDate.endDate.year === year
+  ) {
+    return true;
+  }
+  return false;
+};
+export {checkIsDisable,checkIsSelected};
